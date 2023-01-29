@@ -17,6 +17,7 @@ _✨ Nonebot2反馈插件 ✨_
 <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="python">
 
 </p>
+
 ## 📖 介绍
 
 一个接受群友反馈的Nonebot2反馈插件。
