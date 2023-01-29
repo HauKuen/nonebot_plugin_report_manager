@@ -28,7 +28,7 @@ _✨ Nonebot2反馈插件 ✨_
 <details>
 <summary>使用 nb-cli 安装</summary>
 
-    nb plugin install nonebot_plugin_report_manager
+    nb plugin install nonebot-plugin-report-manager
 
 </details>
 
