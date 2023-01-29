@@ -22,7 +22,7 @@ _✨ Nonebot2反馈插件 ✨_
 
 一个接受群友反馈的Nonebot2反馈插件。
 
-***
+
 ## 💿 安装
 
 <details>
@@ -38,7 +38,7 @@ _✨ Nonebot2反馈插件 ✨_
     pip install nonebot-plugin-couplets
 </details>
 
-***
+
 ## ☀ ️指令
 自定义指令前缀在``.env.*``中写入``COMMAND_START=["前缀"]``
 
@@ -54,14 +54,14 @@ _✨ Nonebot2反馈插件 ✨_
 查看黑名单
 ```
 
-***
+
 ## 😊TODO
 
 - [ ] 合并用户反馈
 - [ ] 限制反馈次数(~~感觉没啥必要~~)
 - [x] 黑名单
 
-***
+
 ## 🙏鸣谢
 
 黑名单功能修改于[nonebot-plugin-namelist](https://github.com/A-kirami/nonebot-plugin-namelist)
