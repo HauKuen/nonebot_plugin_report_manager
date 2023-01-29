@@ -28,14 +28,14 @@ _✨ Nonebot2反馈插件 ✨_
 <details>
 <summary>使用 nb-cli 安装</summary>
 
-    nb plugin install nonebot-plugin-couplets
+    nb plugin install nonebot_plugin_report_manager
 
 </details>
 
 <details>
 <summary>使用包管理器安装</summary>
 
-    pip install nonebot-plugin-couplets
+    pip install nonebot-plugin-report-manager
 </details>
 
 
