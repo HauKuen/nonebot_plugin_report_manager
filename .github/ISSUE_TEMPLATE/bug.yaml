@@ -1,0 +1,10 @@
+name: Bug反馈
+description: 提出bug
+labels: ['bug']
+body:
+  - type: textarea
+    id: describe
+    attributes:
+      label: 说说你遇到的问题？
+    validations:
+      required: true
