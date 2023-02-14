@@ -1,12 +1,14 @@
 from pathlib import Path
 from typing import Literal
 from nonebot.adapters.onebot.v11 import MessageEvent
+from nonebot import get_driver
 
 try:
     import ujson as json
 except ModuleNotFoundError:
     import json
 
+superusers = get_driver().config.superusers
 file_path = Path()/'data'/'blacklist'/'blacklist.json'
 
 blacklist = (
@@ -45,6 +47,8 @@ def handle_blacklist(
             uids.append(i)
     if mode == "add":
         for i in uids:
+            if i in superusers:
+                uids.remove(i)
             if i in blacklist["blacklist"]:
                 uids.remove(i)
         blacklist["blacklist"].extend(uids)
@@ -58,6 +62,6 @@ def handle_blacklist(
         _mode = "删除"
     save_blacklist()
     if len(uids) == 0:
-        return "没有可操作的用户，请检查输入格式或者用户是否在黑名单中"
+        return "没有可操作的用户，请检查输入格式或者用户是否已在黑名单中"
     else:
         return f"已{_mode} {len(uids)} 个黑名单用户: {', '.join(uids)}"
