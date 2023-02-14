@@ -13,6 +13,8 @@ report = on_command("反馈开发者", priority=50)
 @report.handle()
 async def report_handle(bot: Bot, event: Event):
     msg = str(event.get_message()).split("反馈开发者", 1)[1].strip()
+    if msg == "":
+        await report.finish("反馈内容不能为空！")
     if isinstance(event, GroupMessageEvent):
         group_info = await bot.get_group_info(group_id=event.group_id)
         group_name = group_info["group_name"]
@@ -47,6 +49,8 @@ check_blacklist = on_command("查看黑名单", permission=SUPERUSER)
 
 @check_blacklist.handle()
 async def check_black_list():
+    if len(blacklist.blacklist["blacklist"]) == 0:
+        await check_blacklist.finish("当前无黑名单用户")
     await check_blacklist.send(f"当前黑名单用户: {', '.join(blacklist.blacklist['blacklist'])}")
 
 
