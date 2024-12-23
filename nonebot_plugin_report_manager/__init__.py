@@ -5,7 +5,7 @@ from nonebot.message import event_preprocessor
 from nonebot import get_driver, logger
 from nonebot.exception import IgnoredException
 from typing import Set, List
-from .import blacklist
+from .blacklist import blacklist, handle_blacklist
 
 driver = get_driver()
 superusers: Set[str] = driver.config.superusers
@@ -44,7 +44,7 @@ add_blacklist = on_command("拉黑", permission=SUPERUSER)
 
 @add_blacklist.handle()
 async def add_black_list(event: MessageEvent):
-    msg = blacklist.handle_blacklist(event, "add")
+    msg = handle_blacklist(event, "add")
     await add_blacklist.send(msg)
 
 
@@ -53,7 +53,7 @@ del_blacklist = on_command("解除拉黑", permission=SUPERUSER)
 
 @del_blacklist.handle()
 async def del_black_list(event: MessageEvent):
-    msg = blacklist.handle_blacklist(event, "del")
+    msg = handle_blacklist(event, "del")
     await del_blacklist.send(msg)
 
 
@@ -62,9 +62,9 @@ check_blacklist = on_command("查看黑名单", permission=SUPERUSER)
 
 @check_blacklist.handle()
 async def check_black_list():
-    if len(blacklist.blacklist["blacklist"]) == 0:
+    if len(blacklist.users) == 0:
         await check_blacklist.finish("当前无黑名单用户")
-    await check_blacklist.send(f"当前黑名单用户: {', '.join(blacklist.blacklist['blacklist'])}")
+    await check_blacklist.send(f"当前黑名单用户: {', '.join(blacklist.users)}")
 
 
 @event_preprocessor
@@ -72,6 +72,6 @@ def blacklist_processor(event: MessageEvent):
     uid = str(event.user_id)
     if uid in superusers:
         return
-    if uid in blacklist.blacklist["blacklist"]:
+    if uid in blacklist.users:
         logger.debug(f"用户 {uid} 在黑名单中, 忽略本次消息")
         raise IgnoredException("黑名单用户")
