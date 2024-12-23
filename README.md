@@ -39,8 +39,14 @@ _✨ Nonebot2反馈插件 ✨_
 </details>
 
 
-## ☀ ️指令
-自定义指令前缀在``.env.*``中写入``COMMAND_START=["前缀"]``
+## ⚙️ 配置
+
+在 nonebot2 项目的`.env`文件中添加下表中的必填配置
+注意接收信息的账号必须是机器人的好友
+
+| 配置项 | 必填 | 默认值 | 说明 |
+|:-----:|:----:|:----:|:----:|
+| feedback_users | 否 | 无 | 指定反馈账号，如不填写则必须配置superusers |
 
 **反馈功能**
 ```
@@ -58,10 +64,10 @@ _✨ Nonebot2反馈插件 ✨_
 ## 😊TODO
 
 - [ ] 合并用户反馈
-- [ ] 限制反馈次数(~~感觉没啥必要~~)
+- [ ] 自定义反馈指令
 - [x] 黑名单
 
 
 ## 🙏鸣谢
 
-黑名单功能修改于[nonebot-plugin-namelist](https://github.com/A-kirami/nonebot-plugin-namelist)
+黑名单功能灵感来源于[nonebot-plugin-namelist](https://github.com/A-kirami/nonebot-plugin-namelist)

@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(name='nonebot-plugin-report-manager',  
-      version='0.3.0',  
+      version='0.4.0',  
       description='群员通过Bot对话超管',
       author='HauKuen',
       author_email='haukuen@foxmail.com',
