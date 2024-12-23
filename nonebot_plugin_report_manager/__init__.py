@@ -5,10 +5,13 @@ from nonebot.message import event_preprocessor
 from nonebot import get_driver, logger
 from nonebot.exception import IgnoredException
 from typing import Set, List
-from .blacklist import blacklist, handle_blacklist
+from .blacklist import blacklist, handle_blacklist, load_blacklist
 
 driver = get_driver()
 superusers: Set[str] = driver.config.superusers
+
+# 在插件加载时读取黑名单
+load_blacklist()
 
 try:
     feedback_users: List[str] = driver.config.feedback_users
@@ -24,18 +27,18 @@ async def report_handle(bot: Bot, event: Event):
     msg = str(event.get_message()).split("反馈开发者", 1)[1].strip()
     if msg == "":
         await report.finish("反馈内容不能为空！")
-    
+
     # 构建反馈消息
     feedback_msg = (
         f"来自群【{(await bot.get_group_info(group_id=event.group_id))['group_name']}】的用户 {event.get_user_id()} 反馈：{msg}"
         if isinstance(event, GroupMessageEvent)
         else f"用户 {event.get_user_id()} 反馈：{msg}"
     )
-    
+
     # 发送给配置的反馈接收者
     for user_id in feedback_users:
         await bot.send_private_msg(user_id=int(user_id), message=feedback_msg)
-    
+
     await report.finish("已反馈，感谢您的支持！")
 
 
