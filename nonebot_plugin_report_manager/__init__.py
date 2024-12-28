@@ -13,18 +13,26 @@ superusers: Set[str] = driver.config.superusers
 # 在插件加载时读取黑名单
 load_blacklist()
 
+# 获取自定义指令配置
 try:
     feedback_users: List[str] = driver.config.feedback_users
     feedback_users = set(feedback_users)
 except AttributeError:
     feedback_users = superusers
 
-report = on_command("反馈开发者", priority=50)
+# 获取自定义命令配置
+config = driver.config
+REPORT_COMMAND = getattr(config, "report_command", "反馈开发者")
+ADD_BLACKLIST_COMMAND = getattr(config, "add_blacklist_command", "拉黑")
+DEL_BLACKLIST_COMMAND = getattr(config, "del_blacklist_command", "解除拉黑")
+CHECK_BLACKLIST_COMMAND = getattr(config, "check_blacklist_command", "查看黑名单")
+
+report = on_command(REPORT_COMMAND, priority=50)
 
 
 @report.handle()
 async def report_handle(bot: Bot, event: Event):
-    msg = str(event.get_message()).split("反馈开发者", 1)[1].strip()
+    msg = str(event.get_message()).split(REPORT_COMMAND, 1)[1].strip()
     if msg == "":
         await report.finish("反馈内容不能为空！")
 
@@ -42,7 +50,7 @@ async def report_handle(bot: Bot, event: Event):
     await report.finish("已反馈，感谢您的支持！")
 
 
-add_blacklist = on_command("拉黑", permission=SUPERUSER)
+add_blacklist = on_command(ADD_BLACKLIST_COMMAND, permission=SUPERUSER)
 
 
 @add_blacklist.handle()
@@ -51,7 +59,7 @@ async def add_black_list(event: MessageEvent):
     await add_blacklist.send(msg)
 
 
-del_blacklist = on_command("解除拉黑", permission=SUPERUSER)
+del_blacklist = on_command(DEL_BLACKLIST_COMMAND, permission=SUPERUSER)
 
 
 @del_blacklist.handle()
@@ -60,7 +68,7 @@ async def del_black_list(event: MessageEvent):
     await del_blacklist.send(msg)
 
 
-check_blacklist = on_command("查看黑名单", permission=SUPERUSER)
+check_blacklist = on_command(CHECK_BLACKLIST_COMMAND, permission=SUPERUSER)
 
 
 @check_blacklist.handle()
