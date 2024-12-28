@@ -47,6 +47,10 @@ _✨ Nonebot2反馈插件 ✨_
 | 配置项 | 必填 | 默认值 | 说明 |
 |:-----:|:----:|:----:|:----:|
 | feedback_users | 否 | 无 | 指定反馈账号，如不填写则必须配置superusers |
+| report_command | 否 | 无 | 命令前缀，默认为 反馈开发者 |
+| add_blacklist_command | 否 | 无 | 命令前缀，默认为 拉黑 |
+| del_blacklist_command | 否 | 无 | 命令前缀，默认为 解除拉黑 |
+| check_blacklist_command | 否 | 无 | 命令前缀，默认为 查看黑名单 |
 
 **反馈功能**
 ```
